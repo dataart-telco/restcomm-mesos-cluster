@@ -1,0 +1,4 @@
+
+---
+HOSTNAME_VAR: "{{ HOSTNAME_VAR | default("") }}"
+UNIT_NAME_VAR: "{{ UNIT_NAME_VAR | default("") }}"

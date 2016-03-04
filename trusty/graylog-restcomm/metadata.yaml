@@ -1,0 +1,12 @@
+name: graylog-restcomm
+summary: graylog-restcomm
+maintainer: gdubina <gdubina@dataart.com>
+description: |
+  graylog-agent-restcomm
+tags:
+  - misc
+subordinate: true
+requires:
+  mesos:
+    interface: juju-info
+    scope: container

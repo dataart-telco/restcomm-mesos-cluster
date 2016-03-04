@@ -1,0 +1,25 @@
+
+---
+- name: create work dir
+  file: path={{ WORK_DIR }} state=directory
+
+- name: get hostname
+  shell: hostname -I | cut -d ' ' -f1
+  register: local_host
+
+
+- name: init charm state
+  set_fact:
+    HOSTNAME_VAR: "{{ local_host.stdout }}"
+    UNIT_NAME_VAR: "{{ local_unit }}"
+    LOG_LEVEL_VAR: "INFO"
+    MARATHON_HOST_VAR: "{{ local_host.stdout }}:8080"
+    GRAYLOG_HOST_VAR: "graylog-restcomm.marathon.mesos:12201"
+    CALLS_MAX_VAR: "50"
+    RESTCOMM_PORT_VAR: "8080"
+    RESTCOMM_USER_VAR: "ACae6e420f425248d6a26948c17a9e2acf"
+    RESTCOMM_PSWD_VAR: "42d8aa7cde9c78c4757862d84620c335"
+  changed_when: true
+  notify: 
+    - dump config
+

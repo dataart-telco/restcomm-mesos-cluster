@@ -1,0 +1,11 @@
+
+---
+HOSTNAME_VAR: "{{ HOSTNAME_VAR | default("") }}"
+UNIT_NAME_VAR: "{{ UNIT_NAME_VAR | default("") }}"
+LOG_LEVEL_VAR: "{{ LOG_LEVEL_VAR | default("") }}"
+MARATHON_HOST_VAR: "{{ MARATHON_HOST_VAR | default("") }}"
+GRAYLOG_HOST_VAR: "{{ GRAYLOG_HOST_VAR | default("") }}"
+CALLS_MAX_VAR: "{{ CALLS_MAX_VAR | default(50) }}"
+RESTCOMM_PORT_VAR: "{{ RESTCOMM_PORT_VAR | default(8080) }}"
+RESTCOMM_USER_VAR: "{{ RESTCOMM_USER_VAR | default("") }}"
+RESTCOMM_PSWD_VAR: "{{ RESTCOMM_PSWD_VAR | default("") }}"
