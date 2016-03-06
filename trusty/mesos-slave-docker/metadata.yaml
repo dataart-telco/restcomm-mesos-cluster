@@ -1,0 +1,17 @@
+name: mesos-slave-docker
+summary: mesos slave docker
+maintainer: Gennadiy Dubina <gdubina@dataart.com>
+description: |
+  mesos slave docker
+tags:
+  - ops
+  - network
+subordinate: false
+provides:
+  website:
+    interface: http
+requires:
+  zookeeper:
+    interface: zookeeper
+  dns-server:
+    interface: dns-server

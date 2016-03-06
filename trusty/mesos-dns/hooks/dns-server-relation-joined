@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+
+UNIT_PRIVATE_ADDRESS=`unit-get private-address`
+
+relation-set dns-server="$UNIT_PRIVATE_ADDRESS"

@@ -1,0 +1,12 @@
+name: zabbix
+summary: zabbix
+maintainer: gdubina <gdubina@dataart.com>
+description: |
+  zabbix
+tags:
+  - misc
+subordinate: true
+requires:
+  mesos:
+    interface: juju-info
+    scope: container

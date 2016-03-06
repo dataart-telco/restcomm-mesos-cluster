@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -ex
+
+# Install is guaranteed to run once per rootfs
+
+juju-log "Installing mesos-dns on $JUJU_UNIT_NAME"
+status-set maintenance "Fetching and installing mesos-dns"
+
+# Install mesos-dns
+juju-log "Installing mesos-dns on $JUJU_UNIT_NAME"
+wget -O mesos-dns https://github.com/mesosphere/mesos-dns/releases/download/v0.5.1/mesos-dns-v0.5.1-linux-amd64
+chmod +x mesos-dns
+sudo mkdir -p /usr/local/mesos-dns
+sudo mv mesos-dns /usr/local/mesos-dns
+
+mkdir -p opt/mesos-dns-vars/
+
+echo -n "" > /opt/mesos-dns-vars/ZOOKEEPERS
+
+cat > /etc/init/mesos-dns.conf <<EOL
+description "mesos dns"
+
+start on stopped rc RUNLEVEL=[2345]
+respawn
+
+exec /usr/local/mesos-dns/mesos-dns -config=/usr/local/mesos-dns/config.json
+EOL

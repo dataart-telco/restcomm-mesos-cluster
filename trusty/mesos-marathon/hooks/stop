@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+docker stop marathon
+
+status-set maintenance "service stopped"

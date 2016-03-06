@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+docker stop zookeeper
+
+status-set maintenance "service stopped"

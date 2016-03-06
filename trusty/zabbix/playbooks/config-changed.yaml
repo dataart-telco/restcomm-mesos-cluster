@@ -1,0 +1,10 @@
+
+---
+- name: map config to var
+  set_fact:
+#reload config vars to our vars
+    TEST: true
+  changed_when: true
+  notify: 
+    - dump config
+    - restart

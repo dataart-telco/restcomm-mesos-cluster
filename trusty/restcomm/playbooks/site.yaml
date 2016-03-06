@@ -4,8 +4,8 @@
     WORK_DIR: "/var/lib/{{ APP_NAME }}"
     DOCKER_IMAGE: "hamsterksu/restcomm"
     RESTCOMM_PORT_VAR: 8080
-    CPU: 2
-    MEM: 2048
+    CPU: 1
+    MEM: 1024
     APP_MANAGER_API: "http://127.0.0.1:8080/v2/apps"
 #for script only
     APP_SCRIPT_CONFIG: vars/app_vars.yaml

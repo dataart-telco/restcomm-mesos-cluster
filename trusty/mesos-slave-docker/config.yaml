@@ -1,0 +1,5 @@
+options:
+    segment:
+        type: string
+        description: Segment identity 
+        default: "common"

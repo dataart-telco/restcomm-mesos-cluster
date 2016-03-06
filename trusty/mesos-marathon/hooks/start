@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -x
+
+docker rm -f marathon
+
+set -e
+
+ZOOKEEPERS=`cat /opt/marathon-vars/ZOOKEEPERS`
+
+if [[ -n "$ZOOKEEPERS" ]]; then
+    UNIT_PRIVATE_ADDRESS=`unit-get private-address`
+
+    docker run -d \
+    -e MARATHON_HOSTNAME=$UNIT_PRIVATE_ADDRESS \
+    -e MARATHON_HTTPS_ADDRESS=0.0.0.0 \
+    -e MARATHON_HTTP_ADDRESS=0.0.0.0 \
+    -e MARATHON_MASTER=zk://$ZOOKEEPERS/mesos \
+    -e MARATHON_ZK=zk://$ZOOKEEPERS/marathon \
+    --name marathon \
+    --net host \
+    --restart always \
+    mesoscloud/marathon:0.11.0-ubuntu
+
+    status-set active
+else
+    status-set waiting "Zookeeper and Mesos master relations are requred"
+fi
+

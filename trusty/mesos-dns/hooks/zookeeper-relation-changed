@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+
+ZOOKEEPERS=`relation-get zookeepers`
+
+echo -n "$ZOOKEEPERS" > /opt/mesos-dns-vars/ZOOKEEPERS
+
+./hooks/config-changed
+./hooks/start

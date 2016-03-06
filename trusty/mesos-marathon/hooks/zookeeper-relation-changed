@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -x
+
+ZOOKEEPERS=`relation-get zookeepers`
+
+echo -n "$ZOOKEEPERS" > /opt/marathon-vars/ZOOKEEPERS
+
+./hooks/start

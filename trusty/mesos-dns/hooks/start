@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -ex
+
+sudo service mesos-dns stop
+
+ZOOKEEPERS=`cat /opt/mesos-dns-vars/ZOOKEEPERS`
+
+if [[ -n "$ZOOKEEPERS" ]]; then
+    sudo service mesos-dns restart
+
+    status-set active
+else
+    status-set waiting "Zookeeper relation is requred"
+fi

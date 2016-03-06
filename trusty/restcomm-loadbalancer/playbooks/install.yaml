@@ -11,6 +11,7 @@
   set_fact:
     UNIT_NAME_VAR: "{{ local_unit }}"
     HOSTNAME_VAR: "{{ local_host.stdout }}"
+    CLUSTER_SEGMENT_VAR: "tools"
   changed_when: true
   notify: 
     - dump config

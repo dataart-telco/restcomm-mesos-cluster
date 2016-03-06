@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -x
+
+docker rm -f zookeeper
+
+set -e
+
+docker run -d \
+-e MYID=1 \
+-e SERVERS=node-1 \
+--name=zookeeper \
+--net=host \
+--restart=always \
+mesoscloud/zookeeper:3.4.6-ubuntu-14.04
+
+status-set active

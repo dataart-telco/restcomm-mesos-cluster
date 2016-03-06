@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -ex
+
+# Install is guaranteed to run once per rootfs
+
+juju-log "Installing mesos-slave on $JUJU_UNIT_NAME"
+
+status-set maintenance "Fetching and installing docker"
+# Install docker
+wget -qO- https://get.docker.com/ | sh
+sudo usermod -aG docker ubuntu
+
+status-set maintenance "Pull mesos-slave image"
+
+docker pull mesoscloud/mesos-slave:0.24.1-ubuntu
+
+mkdir -p /opt/mesos-slave-vars/
+echo -n "" > /opt/mesos-slave-vars/ZOOKEEPERS
+
+cp /etc/resolvconf/resolv.conf.d/head /etc/resolvconf/resolv.conf.d/head.backup

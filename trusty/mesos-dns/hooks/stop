@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+sudo service mesos-dns stop
+
+status-set maintenance "service stopped"

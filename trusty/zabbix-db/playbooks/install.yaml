@@ -1,0 +1,19 @@
+
+---
+- name: create work dir
+  file: path={{ WORK_DIR }} state=directory
+
+- name: get hostname
+  shell: hostname -I | cut -d ' ' -f1
+  register: local_host
+
+
+- name: init charm state
+  set_fact:
+    HOSTNAME_VAR: "{{ local_host.stdout }}"
+    UNIT_NAME_VAR: "{{ local_unit }}"
+    MARAHTON_HOST_VAR: "{{ local_host.stdout }}:8080"
+  changed_when: true
+  notify: 
+    - dump config
+

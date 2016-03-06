@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -x
+
+docker rm -f mesos-master
+
+set -e
+
+ZOOKEEPERS=`cat /opt/mesos-master-vars/ZOOKEEPERS`
+
+if [[ -n "$ZOOKEEPERS" ]]; then
+    UNIT_PRIVATE_ADDRESS=`unit-get private-address`
+
+    docker run -d \
+    -e MESOS_HOSTNAME=$UNIT_PRIVATE_ADDRESS \
+    -e MESOS_IP=$UNIT_PRIVATE_ADDRESS \
+    -e MESOS_QUORUM=1 \
+    -e MESOS_ZK=zk://$ZOOKEEPERS/mesos \
+    --name mesos-master \
+    --net host \
+    --restart always \
+    mesoscloud/mesos-master:0.24.1-ubuntu
+
+    status-set active
+else
+    status-set waiting "Zookeeper relation is requred"
+fi
+
+

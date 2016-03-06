@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -x
+
+IP_ADDRESS=`relation-get private-address`
+
+cp /etc/resolvconf/resolv.conf.d/head.backup /etc/resolvconf/resolv.conf.d/head
+
+echo  "nameserver $IP_ADDRESS" >> /etc/resolvconf/resolv.conf.d/head
+
+#reload dns
+resolvconf -u

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -ex
+
+ZOOKEEPERS=`cat /opt/mesos-dns-vars/ZOOKEEPERS`
+
+httpon=`config-get dns_httpon`
+dsnon=`config-get dns_dsnon`
+externalon=`config-get dns_externalon`
+
+sudo sh -c "echo '{' > /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"zk\": \"zk://${ZOOKEEPERS}/mesos\",' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"refreshSeconds\": `config-get dns_refreshSeconds`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"ttl\": `config-get dns_ttl`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"domain\": \"`config-get dns_domain`\",' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"port\": `config-get dns_port`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"resolvers\": [\"`unit-get private-address`\", \"8.8.8.8\"],' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"timeout\": `config-get dns_timeout`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"httpon\": ${httpon,,},' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"dsnon\": ${dsnon,,},' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"httpport\": `config-get dns_httpport`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"externalon\": ${externalon,,},' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"listener\": \"`config-get dns_listener`\",' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOAMname\": \"`config-get dns_SOAMname`\",' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOARname\": \"`config-get dns_SOARname`\",' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOARefresh\": `config-get dns_SOARefresh`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOARetry\": `config-get dns_SOARetry`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOAExpire\": `config-get dns_SOAExpire`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"SOAMinttl\": `config-get dns_SOAMinttl`,' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '  \"email\": \"root.mesos-dns.mesos\"' >> /usr/local/mesos-dns/config.json"
+sudo sh -c "echo '}' >> /usr/local/mesos-dns/config.json"

@@ -1,0 +1,25 @@
+{
+  "id": "{{ APP_NAME}}",
+  "cpus": {{ CPU }},
+  "mem": {{ MEM }},
+  "instances": 0,
+  "constraints": [["segment", "CLUSTER", "tools"]],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "network": "BRIDGE",
+      "image": "{{ DOCKER_IMAGE }}",
+      "parameters": [
+        { "key": "env", "value": "MARIADB_USER=zabbix" },
+        { "key": "env", "value": "MARIADB_PASS=my_password" }
+      ],
+      "portMappings": [
+        { "containerPort": 3306, "hostPort": 31306, "servicePort": 31306, "protocol": "tcp" }
+      ]
+    }
+  },
+  "labels": {
+        "collectd_docker_app": "{{ APP_NAME }}",
+        "collectd_docker_task": "{{ APP_NAME }}"
+  }
+}

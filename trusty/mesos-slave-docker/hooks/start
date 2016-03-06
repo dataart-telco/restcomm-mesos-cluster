@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -x
+
+docker rm -f slave
+
+set -e
+
+ZOOKEEPERS=`cat /opt/mesos-slave-vars/ZOOKEEPERS`
+SEGMENT=`config-get segment`
+
+if [[ -n "$ZOOKEEPERS" ]]; then
+    UNIT_PRIVATE_ADDRESS=`unit-get private-address`
+
+    docker run -d \
+    -e MESOS_HOSTNAME=$UNIT_PRIVATE_ADDRESS \
+    -e MESOS_IP=$UNIT_PRIVATE_ADDRESS \
+    -e MESOS_MASTER=zk://$ZOOKEEPERS/mesos \
+    -v /sys/fs/cgroup:/sys/fs/cgroup \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --name slave \
+    --net host \
+    --privileged \
+    --restart always \
+    mesoscloud/mesos-slave:0.24.1-ubuntu \
+    /usr/sbin/mesos-slave \
+    --attributes="segment:$SEGMENT"
+
+    status-set active
+else
+    status-set waiting "Zookeeper relation is requred"
+fi

@@ -1,0 +1,15 @@
+name: mesos-master-docker
+summary: mesos master docker
+maintainer: Gennadiy Dubina <gdubina@dataart.com>
+description: |
+  mesos master docker
+tags:
+  - ops
+  - network
+subordinate: false
+provides:
+  website:
+    interface: http
+requires:
+  zookeeper:
+    interface: zookeeper
