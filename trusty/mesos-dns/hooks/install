@@ -14,7 +14,7 @@ chmod +x mesos-dns
 sudo mkdir -p /usr/local/mesos-dns
 sudo mv mesos-dns /usr/local/mesos-dns
 
-mkdir -p opt/mesos-dns-vars/
+mkdir -p /opt/mesos-dns-vars/
 
 echo -n "" > /opt/mesos-dns-vars/ZOOKEEPERS
 
