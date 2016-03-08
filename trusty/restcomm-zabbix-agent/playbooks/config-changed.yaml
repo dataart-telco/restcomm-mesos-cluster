@@ -3,8 +3,7 @@
 - name: map config to var
   set_fact:
 #reload config vars to our vars
-    JUJU_HOST_VAR: juju_host
-    JUJU_PSWD_VAR: juju_pswd
+    TEST: true
   changed_when: true
   notify: 
     - dump config

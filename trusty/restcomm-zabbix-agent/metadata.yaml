@@ -1,0 +1,12 @@
+name: restcomm-zabbix-agent
+summary: restcomm-zabbix-agent
+maintainer: gdubina <gdubina@dataart.com>
+description: |
+  restcomm-zabbix-agent
+tags:
+  - misc
+subordinate: true
+requires:
+  mesos:
+    interface: juju-info
+    scope: container

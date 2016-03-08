@@ -1,0 +1,26 @@
+
+---
+- name: create work dir
+  file: path={{ WORK_DIR }} state=directory
+
+- name: get hostname
+  shell: hostname -I | cut -d ' ' -f1
+  register: local_host
+
+- name: get zabbix server
+  shell: dig zabbix.marathon.mesos +short
+  register: zabbix_server
+
+- name: init charm state
+  set_fact:
+    HOSTNAME_VAR: "{{ local_host.stdout }}"
+    UNIT_NAME_VAR: "{{ local_unit }}"
+    MARATHON_HOST_VAR: "{{ local_host.stdout }}:8080"
+    ZABBIX_SERVER_VAR: "{{ zabbix_server.stdout }}"
+    ZABBIX_SERVER_PORT_VAR: 31151
+    ZABBIX_AGENT_PORT_VAR: 11050
+    ZABBIX_CHECK_INTERVAL_VAR: 10
+  changed_when: true
+  notify: 
+    - dump config
+

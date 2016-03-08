@@ -1,10 +1,11 @@
 - hosts: all
   vars:
-    APP_NAME: zabbix
+    APP_NAME: restcomm-zabbix-agent
     WORK_DIR: "/var/lib/{{ APP_NAME }}"
-    DOCKER_IMAGE: "datelco/zabbix-restcomm"
-    CPU: 1
-    MEM: 1024
+    DOCKER_IMAGE: "datelco/restcomm-zabbix-agent"
+    CPU: 0.1
+    MEM: 128
+    APP_MANAGER_API: "http://127.0.0.1:8080/v2/apps"
 #for script only
     APP_SCRIPT_CONFIG: vars/app_vars.yaml
   vars_files:

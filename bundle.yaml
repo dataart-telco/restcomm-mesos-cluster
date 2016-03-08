@@ -32,6 +32,9 @@ services:
   zabbix:
     charm: local:trusty/zabbix
     num_units: 1
+  restcomm-zabbix-agent:
+    charm: local:trusty/restcomm-zabbix-agent
+    num_units: 1
   restcomm:
     charm: local:trusty/restcomm
     num_units: 1
@@ -56,15 +59,6 @@ services:
 #      gui-x: "1140"
 #      gui-y: "-196"
 relations:
-# restcomm to mesos
-  - - restcomm
-    - mesos-marathon
-#  - - restcomm-balancer
-#    - mesos-master
-#  - - restcomm
-#    - restcomm-balancer    
-#  - - restcomm:mysql
-#    - mysql:db
 # mesos cluster
   - - zookeeper
     - mesos-master
@@ -87,7 +81,19 @@ relations:
 #    - mesos-master
 #  - - graylog-restcomm
 #    - mesos-master
-  - - zabbix
-    - mesos-marathon
+# zabbix system
   - - zabbix-db
     - mesos-marathon
+  - - zabbix
+    - mesos-marathon
+# restcomm to mesos
+  - - restcomm
+    - mesos-marathon
+  - - restcomm-zabbix-agent
+    - mesos-marathon
+#  - - restcomm-balancer
+#    - mesos-master
+#  - - restcomm
+#    - restcomm-balancer    
+#  - - restcomm:mysql
+#    - mysql:db

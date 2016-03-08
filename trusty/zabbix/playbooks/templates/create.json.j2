@@ -13,7 +13,9 @@
         { "key": "env", "value": "ZS_DBHost=zabbix-db.marathon.mesos" },
         { "key": "env", "value": "ZS_DBPort=31306" },
         { "key": "env", "value": "ZS_DBUser=zabbix" },
-        { "key": "env", "value": "ZS_DBPassword=my_password" }
+        { "key": "env", "value": "ZS_DBPassword=my_password" },
+        { "key": "env", "value": "JUJU_HOST={{ JUJU_HOST_VAR }}" },
+        { "key": "env", "value": "JUJU_PSWD={{ JUJU_PSWD_VAR }}" }
       ],
       "portMappings": [
         { "containerPort": 80, "hostPort": 31080, "servicePort": 31080, "protocol": "tcp" },

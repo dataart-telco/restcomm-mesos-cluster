@@ -1,0 +1,9 @@
+options:
+  juju_host:
+    type: string
+    default: ""
+    description: "juju api host"
+  juju_pswd:
+    type: string
+    default: ""
+    description: "juju api password"
