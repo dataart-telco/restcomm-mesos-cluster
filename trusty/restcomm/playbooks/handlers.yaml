@@ -13,7 +13,6 @@
     - delete mesos app
     - create mesos app
     - create app instance
-    - update haproxy
 
 - name: stop mesos app
   uri:
@@ -45,22 +44,3 @@
   retries: 3
   delay: 5
 
-- name: update haproxy
-  command: /bin/true
-  notify:
-    - get haproxy relId
-    - get service info for haproxy
-    - send services to haproxy
-
-- name: get haproxy relId
-  command: relation-ids haproxy
-  register: relationId
-
-- name: get service info for haproxy
-  command: "../actions/haproxy_util.sh"
-  when: relationId.stdout != ""
-  register: ha_services
-
-- name: send services to haproxy
-  command: "relation-set -r {{ relationId.stdout}} \"{{ ha_services.stdout }}\""
-  when: relationId.stdout != ""

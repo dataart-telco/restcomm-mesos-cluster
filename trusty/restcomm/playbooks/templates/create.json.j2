@@ -3,7 +3,7 @@
   "cpus": {{ CPU }},
   "mem": {{ MEM }},
   "instances": 0,
-  "constraints": [["hostname", "UNIQUE"]],
+  "constraints": [["hostname", "UNIQUE"], ["segment", "CLUSTER", "{{ CLUSTER_SEGMENT_VAR }}"]]
   "container": {
     "type": "DOCKER",
     "docker": {

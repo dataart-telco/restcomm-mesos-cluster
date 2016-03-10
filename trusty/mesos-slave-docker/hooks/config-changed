@@ -2,4 +2,10 @@
 
 set -x
 
+OVERRIDE_HOSTNAME=`config-get override_hostname`
+if [ "$OVERRIDE_HOSTNAME" = "true" ]; then
+    IP=`unit-get public-address`
+    echo "$IP hostname" >> /etc/hosts
+fi
+
 ./hooks/start

@@ -22,10 +22,20 @@ services:
     constraints: "mem=4G cpu-cores=4 root-disk=12G"
     options:
       segment: tools
+      override_hostname: true
+  mesos-restcomm:
+    charm: local:trusty/mesos-slave-docker
+    num_units: 1
+    constraints: "mem=4G cpu-cores=4 root-disk=8G"
+    options:
+      segment: restcomm
+      override_hostname: true
   mesos-slave: 
     charm: local:trusty/mesos-slave-docker
-    num_units: 2
+    num_units: 1
     constraints: "mem=4G cpu-cores=2 root-disk=12G"
+    options:
+      override_hostname: true
   zabbix-db:
     charm: local:trusty/zabbix-db
     num_units: 1

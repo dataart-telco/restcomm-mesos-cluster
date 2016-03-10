@@ -1,5 +1,9 @@
 options:
-    segment:
-        type: string
-        description: Segment identity 
-        default: "common"
+  override_hostname:
+    type: bool
+    description: Use ip instead of hostname
+    default: false
+  segment:
+    type: string
+    description: Segment identity 
+    default: "common"
