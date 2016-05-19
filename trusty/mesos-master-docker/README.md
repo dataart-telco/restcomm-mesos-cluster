@@ -1,3 +1,3 @@
-#Mesos zookeeper
+#Mesos master
 
-deploy zookepeer docker container
+deploy master docker container

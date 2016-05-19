@@ -6,6 +6,9 @@
 #    job: "juju-run {{ UNIT_NAME_VAR }} actions/mesos-app-changed  >> /var/log/{{ APP_NAME }}_cron.log 2>&1"
 
 - name: start app
-  command: /bin/true
+  set_fact:
+    STARTED: "true"
+  changed_when: true
   notify:
+    - dump config
     - restart

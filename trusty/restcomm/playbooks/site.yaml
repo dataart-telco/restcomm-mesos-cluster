@@ -2,7 +2,7 @@
   vars:
     APP_NAME: restcomm
     WORK_DIR: "/var/lib/{{ APP_NAME }}"
-    DOCKER_IMAGE: "hamsterksu/restcomm"
+    DOCKER_IMAGE: "restcomm/restcomm"
     RESTCOMM_PORT_VAR: 8080
     CPU: 1
     MEM: 1024

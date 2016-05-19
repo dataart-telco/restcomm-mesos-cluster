@@ -20,3 +20,7 @@ echo -n "" > /opt/marathon-vars/ZOOKEEPERS
 docker pull mesoscloud/marathon:0.11.0-ubuntu
 
 cp /etc/resolvconf/resolv.conf.d/head /etc/resolvconf/resolv.conf.d/head.backup
+
+UNIT_PRIVATE_ADDRESS=`unit-get private-address`
+HOSTNAME=`hostname`
+echo "$UNIT_PRIVATE_ADDRESS $HOSTNAME" >> /etc/hosts

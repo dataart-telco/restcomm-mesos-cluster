@@ -1,6 +1,8 @@
 name: mesos-master-docker
 summary: mesos master docker
 maintainer: Gennadiy Dubina <gdubina@dataart.com>
+series: 
+  - trusty
 description: |
   mesos master docker
 tags:

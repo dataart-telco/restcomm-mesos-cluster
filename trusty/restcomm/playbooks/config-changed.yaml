@@ -9,4 +9,10 @@
   changed_when: true
   notify: 
     - dump config
+
+- name: start app
+  command: /bin/true
+  when: STARTED == 'true'
+  notify:
     - restart
+

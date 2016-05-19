@@ -1,6 +1,6 @@
 options:
   override_hostname:
-    type: bool
+    type: boolean
     description: Use ip instead of hostname
     default: false
   segment:
